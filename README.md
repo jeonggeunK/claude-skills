@@ -44,8 +44,7 @@ if (Test-Path "$skills\.git") {
 }
 ```
 
-- **public 저장소면** 위 명령이 GitHub 로그인 없이 바로 됩니다.
-- **private 저장소면** 그 PC에서 최초 1회 GitHub 인증이 필요합니다 (Git Credential Manager 로그인 또는 `gh auth login`).
+- 이 저장소는 **public**이라 GitHub 로그인 없이 어느 PC에서든 바로 됩니다.
 - 설치 후 창을 새로고침하면 `skill-router`가 켜져, **어떤 스킬 쓸지 묻지 않아도 알아서 판단·제안**합니다.
 
 ## 자동 업데이트 (여러 PC 동기화)
@@ -57,7 +56,8 @@ if (Test-Path "$skills\.git") {
 - 스크립트는 **멱등**입니다 — 여러 번 실행해도 훅이 중복 추가되지 않습니다.
 - 한 PC에서 스킬을 추가/수정하면 `git add -A && git commit -m "..." && git push` 하고,
   다른 PC에서는 다음 세션 시작 때 자동으로 당겨옵니다.
-- private 저장소라 각 PC에서 최초 1회 GitHub 인증(자격증명 저장)이 필요합니다.
+- 이 저장소는 **public**이라, 어느 PC에서든 GitHub 로그인 없이 clone·pull 됩니다.
+  (`push`는 여전히 소유자 GitHub 인증이 필요합니다.)
 
 ## 출처
 
