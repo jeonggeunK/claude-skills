@@ -1,6 +1,6 @@
 # 스킬 카탈로그 (Skill Catalog)
 
-이 저장소(`~/.claude/skills`)에 설치된 전역 스킬 **133개**를 출처별로 정리했습니다. **한국어 요약**과 함께, 각 스킬의 `SKILL.md`에서 그대로 뽑은 **영어 원문 설명**을 병기했습니다.
+이 저장소(`~/.claude/skills`)에 설치된 전역 스킬 **134개**를 출처별로 정리했습니다. **한국어 요약**과 함께, 각 스킬의 `SKILL.md`에서 그대로 뽑은 **영어 원문 설명**을 병기했습니다.
 
 ## 스킬은 어떻게 쓰나요?
 
@@ -23,7 +23,7 @@
 - [Stop Slop — hardikpandya/stop-slop (1)](#stop-slop-hardikpandya-stop-slop)
 - [Obsidian Second Brain — eugeniughelbur/obsidian-second-brain (1)](#obsidian-second-brain-eugeniughelbur-obsidian-second-brain)
 - [Claude Council — hex/claude-council (4)](#claude-council-hex-claude-council)
-- [기타 / 직접 추가 (2)](#기타-직접-추가)
+- [기타 / 직접 추가 (3)](#기타-직접-추가)
 
 ## Anthropic 공식 — anthropics/skills
 
@@ -221,4 +221,5 @@
 | 스킬 | 한국어 설명 | Description (원문) |
 |------|-------------|--------------------|
 | **agent-council** | 여러 AI 에이전트 의견을 모아 종합. "council 소환" 시. | Collect and synthesize opinions from multiple AI agents. Use when users say "summon the council", "ask other AIs", or want multiple AI perspectives on a question. |
+| **agent-team-builder** | 인터뷰로 업무를 파악해 @Orchestrator+서브에이전트 3~5명 팀·워크플로우·동적 모델티어를 설계·생성. "에이전트 팀/업무 자동화 시스템 만들어줘"에 발동. | Set up or run a multi-agent "orchestra" team — a main @Orchestrator plus 3~5 sub-agents with dynamic per-task model tiering (Haiku/Sonnet/Opus swapped per task). Trigger when the user wants to build an agent team, set up orchestration, or automate a whole wor… |
 | **skill-router** | 묻지 않아도, 작업을 주면 알아서 가장 맞는 스킬을 판단해 제안·실행(선제적 라우팅). | Proactively routes the user's request to the best-matching installed skill — WITHOUT being asked "which skill". Consider this at the START of essentially every real task the user gives, before doing the work: this library has 130+ skills (documents, marketing… |
