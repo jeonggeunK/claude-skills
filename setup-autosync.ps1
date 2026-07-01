@@ -1,4 +1,4 @@
-# setup-autosync.ps1
+﻿# setup-autosync.ps1
 # ~/.claude/settings.json 에 두 가지 훅을 (멱등하게) 추가합니다:
 #   1) SessionStart    → 세션 시작마다 이 스킬 저장소를 git pull (여러 PC 자동 동기화)
 #   2) UserPromptSubmit → 매 프롬프트마다 "이 요청에 맞는 스킬을 먼저 판단·제안하라" 리마인더 주입

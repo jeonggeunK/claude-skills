@@ -6,46 +6,32 @@
 
 ## 새 PC에 설치하는 법
 
-Windows PowerShell:
+**한 줄 설치 (권장)** — PowerShell에서 (public이라 로그인 불필요):
 
 ```powershell
-# 1) 스킬 저장소를 전역 위치로 클론
-git clone https://github.com/jeonggeunK/claude-skills.git "$env:USERPROFILE\.claude\skills"
-
-# 2) 자동동기화 켜기 (아래 "자동 업데이트" 참고) — 한 번만
-& "$env:USERPROFILE\.claude\skills\setup-autosync.ps1"
+irm https://raw.githubusercontent.com/jeonggeunK/claude-skills/main/install.ps1 | iex
 ```
 
-클론 후 Claude Code(또는 VS Code 창)를 새로고침/재시작하면 스킬이 인식됩니다.
+`install.ps1`이 상황을 알아서 판별합니다:
+- `~/.claude/skills`가 **없거나 비어 있으면** → 전체 clone (git 관리 → 자동 동기화 O)
+- **이미 이 저장소면** → `git pull`로 최신화
+- **다른 스킬이 이미 있으면** → **없는 스킬만 추가(병합)**, 기존 것은 안 건드림
+- 어느 경우든 마지막에 훅(자동 pull + 매 프롬프트 스킬 판단)을 켭니다.
 
-### 방법 2 · Claude Code에게 세팅 프롬프트로 시키기
-
-새 PC/계정의 Claude Code 채팅창에 아래를 그대로 붙여넣으면 됩니다:
+**또는 Claude Code에게 시키기** — 채팅창에 붙여넣기:
 
 ```
 내 Claude 스킬 라이브러리를 이 PC에 설치해줘.
-https://github.com/jeonggeunK/claude-skills 를 ~/.claude/skills 에 git clone 하고
-(그 폴더가 이미 있고 비어있지 않으면 clone 대신 알려줘),
-그 안의 setup-autosync.ps1 을 실행해서 세션 시작 때마다 자동으로 최신 스킬을 pull 하도록 켜줘.
+https://github.com/jeonggeunK/claude-skills 의 install.ps1 을 받아 실행해줘.
+(폴더가 이미 있고 다른 스킬이 있으면, 덮어쓰지 말고 '없는 것만' 추가해줘.)
 끝나면 VS Code 창(또는 Claude Code)을 새로고침하라고 알려줘.
 ```
 
-또는 PowerShell에서 직접 (기존 폴더가 있어도 안전하게 처리):
+설치 후 Claude Code(또는 VS Code 창)를 새로고침하면 스킬이 인식됩니다. 창을 새로고침하면
+`skill-router` + UserPromptSubmit 훅이 켜져, **어떤 스킬 쓸지 묻지 않아도 알아서 판단·제안**합니다.
 
-```powershell
-$skills = "$env:USERPROFILE\.claude\skills"
-if (Test-Path "$skills\.git") {
-    git -C $skills pull --ff-only            # 이미 클론돼 있으면 최신화만
-} elseif ((Test-Path $skills) -and (Get-ChildItem $skills -Force)) {
-    Write-Host "이미 $skills 에 파일이 있습니다. 백업 후 다시 시도하세요."
-} else {
-    git clone https://github.com/jeonggeunK/claude-skills.git $skills
-    & "$skills\setup-autosync.ps1"
-}
-```
-
-- 이 저장소는 **public**이라 GitHub 로그인 없이 어느 PC에서든 바로 됩니다.
-- 설치 후 창을 새로고침하면 `skill-router`가 켜져, **어떤 스킬 쓸지 묻지 않아도 알아서 판단·제안**합니다.
+> 참고: 병합(없는 것만 추가) 방식으로 넣은 스킬은 복사본이라 자동 `pull` 대상이 아닙니다.
+> 전부 자동 동기화까지 원하면, 기존 폴더를 백업 후 비우고 다시 실행해 **전체 clone**을 받으세요.
 
 ## 자동 업데이트 (여러 PC 동기화)
 
