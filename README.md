@@ -4,18 +4,28 @@
 
 ## 새 PC에 설치하는 법
 
-```bash
-# 새 PC에서 (git 설치돼 있어야 함)
-git clone <이 저장소 URL> "$HOME/.claude/skills"
-```
-
 Windows PowerShell:
 
 ```powershell
-git clone <이 저장소 URL> "$env:USERPROFILE\.claude\skills"
+# 1) 스킬 저장소를 전역 위치로 클론
+git clone https://github.com/jeonggeunK/claude-skills.git "$env:USERPROFILE\.claude\skills"
+
+# 2) 자동동기화 켜기 (아래 "자동 업데이트" 참고) — 한 번만
+& "$env:USERPROFILE\.claude\skills\setup-autosync.ps1"
 ```
 
 클론 후 Claude Code(또는 VS Code 창)를 새로고침/재시작하면 스킬이 인식됩니다.
+
+## 자동 업데이트 (여러 PC 동기화)
+
+`setup-autosync.ps1`을 한 번 실행하면 `~/.claude/settings.json`에 **SessionStart 훅**이
+추가됩니다. 이후 Claude Code를 켤 때마다 이 저장소를 백그라운드에서 `git pull` 해서
+최신 스킬로 맞춰줍니다. (비차단·async, 인증 프롬프트가 뜨면 조용히 넘어감)
+
+- 스크립트는 **멱등**입니다 — 여러 번 실행해도 훅이 중복 추가되지 않습니다.
+- 한 PC에서 스킬을 추가/수정하면 `git add -A && git commit -m "..." && git push` 하고,
+  다른 PC에서는 다음 세션 시작 때 자동으로 당겨옵니다.
+- private 저장소라 각 PC에서 최초 1회 GitHub 인증(자격증명 저장)이 필요합니다.
 
 ## 출처
 
