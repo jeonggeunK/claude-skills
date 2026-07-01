@@ -49,9 +49,14 @@ if (Test-Path "$skills\.git") {
 
 ## 자동 업데이트 (여러 PC 동기화)
 
-`setup-autosync.ps1`을 한 번 실행하면 `~/.claude/settings.json`에 **SessionStart 훅**이
-추가됩니다. 이후 Claude Code를 켤 때마다 이 저장소를 백그라운드에서 `git pull` 해서
-최신 스킬로 맞춰줍니다. (비차단·async, 인증 프롬프트가 뜨면 조용히 넘어감)
+`setup-autosync.ps1`을 한 번 실행하면 `~/.claude/settings.json`에 **훅 2개**가 추가됩니다:
+
+1. **SessionStart 훅** — Claude Code를 켤 때마다 이 저장소를 백그라운드에서 `git pull` 해
+   최신 스킬로 맞춰줍니다. (비차단·async, 인증 프롬프트가 뜨면 조용히 넘어감)
+2. **UserPromptSubmit 훅** — 프롬프트를 넣을 때마다 "이 요청에 맞는 스킬을 먼저 판단해
+   제안·사용하라"는 리마인더를 주입합니다. 그래서 **묻지 않아도 매번** 알맞은 스킬을 골라
+   씁니다(애매하면 `skill-router` 사용). 인사·잡담엔 끼어들지 않습니다.
+   - 끄고 싶으면 `~/.claude/settings.json`의 `hooks.UserPromptSubmit` 항목을 지우면 됩니다.
 
 - 스크립트는 **멱등**입니다 — 여러 번 실행해도 훅이 중복 추가되지 않습니다.
 - 한 PC에서 스킬을 추가/수정하면 `git add -A && git commit -m "..." && git push` 하고,
