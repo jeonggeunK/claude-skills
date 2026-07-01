@@ -1,6 +1,6 @@
 # 스킬 카탈로그 (Skill Catalog)
 
-이 저장소(`~/.claude/skills`)에 설치된 전역 스킬 **132개**를 출처별로 정리했습니다. **한국어 요약**과 함께, 각 스킬의 `SKILL.md`에서 그대로 뽑은 **영어 원문 설명**을 병기했습니다.
+이 저장소(`~/.claude/skills`)에 설치된 전역 스킬 **133개**를 출처별로 정리했습니다. **한국어 요약**과 함께, 각 스킬의 `SKILL.md`에서 그대로 뽑은 **영어 원문 설명**을 병기했습니다.
 
 ## 스킬은 어떻게 쓰나요?
 
@@ -23,7 +23,7 @@
 - [Stop Slop — hardikpandya/stop-slop (1)](#stop-slop-hardikpandya-stop-slop)
 - [Obsidian Second Brain — eugeniughelbur/obsidian-second-brain (1)](#obsidian-second-brain-eugeniughelbur-obsidian-second-brain)
 - [Claude Council — hex/claude-council (4)](#claude-council-hex-claude-council)
-- [기타 / 직접 추가 (1)](#기타-직접-추가)
+- [기타 / 직접 추가 (2)](#기타-직접-추가)
 
 ## Anthropic 공식 — anthropics/skills
 
@@ -221,3 +221,4 @@
 | 스킬 | 한국어 설명 | Description (원문) |
 |------|-------------|--------------------|
 | **agent-council** | 여러 AI 에이전트 의견을 모아 종합. "council 소환" 시. | Collect and synthesize opinions from multiple AI agents. Use when users say "summon the council", "ask other AIs", or want multiple AI perspectives on a question. |
+| **skill-router** | 작업을 듣고 이 라이브러리에서 가장 맞는 스킬을 골라 실행. "어떤 스킬 써?"라고 물을 때. | Picks the best-matching skill(s) from the user's installed skill library for a given task, and then uses them. Trigger when the user explicitly asks which skill to use ("어떤 스킬 써야 해?", "무슨 스킬 쓰면 돼?", "이 작업에 맞는 스킬 골라줘", "스킬 추천해줘", "which skill should I use", "f… |
