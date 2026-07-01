@@ -18,6 +18,36 @@ git clone https://github.com/jeonggeunK/claude-skills.git "$env:USERPROFILE\.cla
 
 클론 후 Claude Code(또는 VS Code 창)를 새로고침/재시작하면 스킬이 인식됩니다.
 
+### 방법 2 · Claude Code에게 세팅 프롬프트로 시키기
+
+새 PC/계정의 Claude Code 채팅창에 아래를 그대로 붙여넣으면 됩니다:
+
+```
+내 Claude 스킬 라이브러리를 이 PC에 설치해줘.
+https://github.com/jeonggeunK/claude-skills 를 ~/.claude/skills 에 git clone 하고
+(그 폴더가 이미 있고 비어있지 않으면 clone 대신 알려줘),
+그 안의 setup-autosync.ps1 을 실행해서 세션 시작 때마다 자동으로 최신 스킬을 pull 하도록 켜줘.
+끝나면 VS Code 창(또는 Claude Code)을 새로고침하라고 알려줘.
+```
+
+또는 PowerShell에서 직접 (기존 폴더가 있어도 안전하게 처리):
+
+```powershell
+$skills = "$env:USERPROFILE\.claude\skills"
+if (Test-Path "$skills\.git") {
+    git -C $skills pull --ff-only            # 이미 클론돼 있으면 최신화만
+} elseif ((Test-Path $skills) -and (Get-ChildItem $skills -Force)) {
+    Write-Host "이미 $skills 에 파일이 있습니다. 백업 후 다시 시도하세요."
+} else {
+    git clone https://github.com/jeonggeunK/claude-skills.git $skills
+    & "$skills\setup-autosync.ps1"
+}
+```
+
+- **public 저장소면** 위 명령이 GitHub 로그인 없이 바로 됩니다.
+- **private 저장소면** 그 PC에서 최초 1회 GitHub 인증이 필요합니다 (Git Credential Manager 로그인 또는 `gh auth login`).
+- 설치 후 창을 새로고침하면 `skill-router`가 켜져, **어떤 스킬 쓸지 묻지 않아도 알아서 판단·제안**합니다.
+
 ## 자동 업데이트 (여러 PC 동기화)
 
 `setup-autosync.ps1`을 한 번 실행하면 `~/.claude/settings.json`에 **SessionStart 훅**이
