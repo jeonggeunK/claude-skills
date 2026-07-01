@@ -2,6 +2,8 @@
 
 내 Claude Code 전역 스킬 모음입니다. 새 PC에서도 그대로 쓰려고 git으로 관리합니다.
 
+> 📖 **설치된 스킬이 각각 뭔지 / 어떻게 쓰는지**는 [CATALOG.md](CATALOG.md)에 출처별로 정리돼 있습니다.
+
 ## 새 PC에 설치하는 법
 
 Windows PowerShell:
