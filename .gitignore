@@ -1,0 +1,16 @@
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+*.swp
+
+# Node (in case a skill ships one)
+node_modules/
+
+# Python caches
+__pycache__/
+*.pyc
+.venv/
