@@ -221,4 +221,4 @@
 | 스킬 | 한국어 설명 | Description (원문) |
 |------|-------------|--------------------|
 | **agent-council** | 여러 AI 에이전트 의견을 모아 종합. "council 소환" 시. | Collect and synthesize opinions from multiple AI agents. Use when users say "summon the council", "ask other AIs", or want multiple AI perspectives on a question. |
-| **skill-router** | 작업을 듣고 이 라이브러리에서 가장 맞는 스킬을 골라 실행. "어떤 스킬 써?"라고 물을 때. | Picks the best-matching skill(s) from the user's installed skill library for a given task, and then uses them. Trigger when the user explicitly asks which skill to use ("어떤 스킬 써야 해?", "무슨 스킬 쓰면 돼?", "이 작업에 맞는 스킬 골라줘", "스킬 추천해줘", "which skill should I use", "f… |
+| **skill-router** | 묻지 않아도, 작업을 주면 알아서 가장 맞는 스킬을 판단해 제안·실행(선제적 라우팅). | Proactively routes the user's request to the best-matching installed skill — WITHOUT being asked "which skill". Consider this at the START of essentially every real task the user gives, before doing the work: this library has 130+ skills (documents, marketing… |
