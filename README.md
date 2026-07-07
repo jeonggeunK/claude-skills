@@ -35,14 +35,22 @@ https://github.com/jeonggeunK/claude-skills 의 install.ps1 을 받아 실행해
 
 ## 자동 업데이트 (여러 PC 동기화)
 
-`setup-autosync.ps1`을 한 번 실행하면 `~/.claude/settings.json`에 **훅 2개**가 추가됩니다:
+`setup-autosync.ps1`을 한 번 실행하면 `~/.claude/settings.json`에 **훅 3개**가 추가되고,
+**전역 CLAUDE.md**가 동기화됩니다:
 
-1. **SessionStart 훅** — Claude Code를 켤 때마다 이 저장소를 백그라운드에서 `git pull` 해
+1. **SessionStart 훅 (스킬 pull)** — Claude Code를 켤 때마다 이 저장소를 백그라운드에서 `git pull` 해
    최신 스킬로 맞춰줍니다. (비차단·async, 인증 프롬프트가 뜨면 조용히 넘어감)
-2. **UserPromptSubmit 훅** — 프롬프트를 넣을 때마다 "이 요청에 맞는 스킬을 먼저 판단해
-   제안·사용하라"는 리마인더를 주입합니다. 그래서 **묻지 않아도 매번** 알맞은 스킬을 골라
-   씁니다(애매하면 `skill-router` 사용). 인사·잡담엔 끼어들지 않습니다.
+2. **SessionStart 훅 (플러그인)** — `plugins.txt` 목록의 공식 플러그인을 없는 것만 설치합니다.
+3. **UserPromptSubmit 훅** — 프롬프트를 넣을 때마다 **스킬 우선 절차**(①맞는 스킬 판단 →
+   ②애매하면 `skill-router`의 라우팅 표로 결정 → ③"→ 스킬명 사용" 알리고 그 지시대로 진행)를
+   번호 절차로 주입합니다. Haiku/Sonnet 같은 작은 모델에서도 같은 라우팅이 나오도록
+   판단 재량을 줄인 문구입니다. 인사·잡담엔 끼어들지 않습니다.
    - 끄고 싶으면 `~/.claude/settings.json`의 `hooks.UserPromptSubmit` 항목을 지우면 됩니다.
+4. **전역 CLAUDE.md 동기화** — 저장소의 `CLAUDE.global.md`(추측 금지·완료 전 검증 등
+   모델 공통 품질 규칙)를 `~/.claude/CLAUDE.md`의 managed block으로 복사/갱신합니다.
+   기존 CLAUDE.md가 있으면 블록만 추가·교체하고 나머지는 건드리지 않습니다.
+   규칙을 고치려면 저장소의 `CLAUDE.global.md`를 고치고 push → 다른 PC에서
+   `install.ps1`(또는 `setup-autosync.ps1`)을 다시 실행하면 반영됩니다.
 
 - 스크립트는 **멱등**입니다 — 여러 번 실행해도 훅이 중복 추가되지 않습니다.
 - 한 PC에서 스킬을 추가/수정하면 `git add -A && git commit -m "..." && git push` 하고,
