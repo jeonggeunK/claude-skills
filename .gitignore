@@ -14,3 +14,9 @@ node_modules/
 __pycache__/
 *.pyc
 .venv/
+
+# Local-only (managed by other installers / the app) — not synced
+gsd-*/
+synced/
+.trash/
+reverse-engineer-anything/
