@@ -1,0 +1,5 @@
+# 모든 PC에 켤 외부(서드파티) 플러그인 목록 — 형식: <플러그인>@<마켓플레이스> <GitHub owner/repo>
+# sync-plugins.ps1이 ~/.claude/settings.json 의 extraKnownMarketplaces/enabledPlugins 에 없는 것만 추가.
+# 끄려면 여기서 지워도 기존 PC 설정은 안 바뀌니, 그 PC settings.json 에서 false 로 바꾸세요.
+ponytail@ponytail DietrichGebert/ponytail
+ecc@ecc affaan-m/ECC

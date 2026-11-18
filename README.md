@@ -40,7 +40,7 @@ https://github.com/jeonggeunK/claude-skills 의 install.ps1 을 받아 실행해
 
 1. **SessionStart 훅 (스킬 pull)** — Claude Code를 켤 때마다 이 저장소를 백그라운드에서 `git pull` 해
    최신 스킬로 맞춰줍니다. (비차단·async, 인증 프롬프트가 뜨면 조용히 넘어감)
-2. **SessionStart 훅 (플러그인)** — `plugins.txt` 목록의 공식 플러그인을 없는 것만 설치합니다.
+2. **SessionStart 훅 (플러그인)** — `plugins.txt` 목록의 공식 플러그인을 없는 것만 설치합니다. `external-plugins.txt`의 외부 플러그인(ponytail, ECC 등)은 settings.json에 등록해 켭니다(claude CLI 없어도 동작).
 3. **UserPromptSubmit 훅** — 프롬프트를 넣을 때마다 **스킬 우선 절차**(①맞는 스킬 판단 →
    ②애매하면 `skill-router`의 라우팅 표로 결정 → ③"→ 스킬명 사용" 알리고 그 지시대로 진행)를
    번호 절차로 주입합니다. Haiku/Sonnet 같은 작은 모델에서도 같은 라우팅이 나오도록
